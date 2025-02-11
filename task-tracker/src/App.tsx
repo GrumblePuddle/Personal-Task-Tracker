@@ -6,9 +6,9 @@ type Task = { id: number; text: string; done: boolean };
 function App() {
   const [input, setInput] = useState<string>("");
   const [list, setList] = useState<Task[]>([]);
-  const [idCounter, setIdCounter] = useState(0);
+  const [idCounter, setIdCounter] = useState<number>(0);
 
-  const addTask = () => {
+  const addTask = (): void => {
     if (input.trim() !== "") {
       setList((l) => [...l, { id: idCounter, text: input, done: false }]);
       setInput("");
@@ -16,21 +16,21 @@ function App() {
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setInput(e.target.value);
   };
 
-  const handleTaskTextChange = (id: number, newText: string) => {
+  const handleTaskTextChange = (id: number, newText: string): void => {
     setList((l) =>
       l.map((task) => (task.id === id ? { ...task, text: newText } : task))
     );
   };
 
-  const removeTask = (index: number) => {
+  const removeTask = (index: number): void => {
     setList((l) => l.filter((_, i) => i !== index));
   };
 
-  const toggleTaskDone = (id: number) => {
+  const toggleTaskDone = (id: number): void => {
     setList((l) =>
       l.map((task) => (task.id === id ? { ...task, done: !task.done } : task))
     );
